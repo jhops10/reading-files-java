@@ -4,17 +4,29 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args)  {
 
-        String[] lines = new String[] {"Bom dia", "Boa tarde", "Boa Noite"};
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a folder path: ");
+        String strPath = sc.nextLine();
 
-        String path = "E:\\DEVELOPMENT\\Java\\Projetos\\arquivo2.txt";
+        File path = new File(strPath);
+        File[] folders = path.listFiles(File::isDirectory);
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))){
-            for(String line : lines){
-                bw.write(line);
-                bw.newLine();
-            }
-        } catch (IOException e){
-            e.printStackTrace();
+        System.out.println("Folders:");
+
+        for(File folder : folders){
+            System.out.println(folder);
         }
+
+        File[] files = path.listFiles(File::isFile);
+        System.out.println("Files: ");
+        for(File file : files){
+            System.out.println(file);
+        }
+
+        boolean success = new File(strPath + "\\subdir").mkdir();
+        System.out.println("Diretório criado com sucesso!" + success);
+
+
+        sc.close();
     }
 }
