@@ -3,19 +3,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args)  {
-       String path = "E:\\DEVELOPMENT\\Java\\Projetos\\arquivo.txt";
 
+        String[] lines = new String[] {"Bom dia", "Boa tarde", "Boa Noite"};
 
-        try(BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line = br.readLine();
+        String path = "E:\\DEVELOPMENT\\Java\\Projetos\\arquivo2.txt";
 
-            while (line != null){
-                System.out.println(line);
-                line = br.readLine();
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))){
+            for(String line : lines){
+                bw.write(line);
+                bw.newLine();
             }
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+        } catch (IOException e){
+            e.printStackTrace();
         }
-
     }
 }
